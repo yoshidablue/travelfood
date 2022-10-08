@@ -14,7 +14,7 @@
             <p>ようこそ、<%= current_customer.name %>さん！</p>
             <li><%= link_to "会員詳細", customer_path(current_customer), class: "btn header-button text-light" %></li>
             <li><%= link_to "会員一覧", customers_path, class: "btn header-button text-light" %> </li>
-            <li><%= link_to "投稿一覧", class: "btn header-button text-light" %></li>
+            <li><%= link_to "投稿一覧", posts_path, class: "btn header-button text-light" %></li>
             <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn header-button text-light" %></li>
 
           <!-- 管理者がログインしている時 -->

@@ -18,6 +18,13 @@ Rails.application.routes.draw do
       get 'followers'  => 'relationships#followers',  as: 'followers'
       get "unsubscribe" => "customers#unsubscribe", as: "unsubscribe"
       patch "withdraw" => "customers#withdraw", as: "withdraw"
+      member do
+        get 'favorites'
+      end
+    end
+    resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
+      resources :food_comments, only: [:create, :destroy]
+      resource  :favorites,     only: [:create, :destroy]
     end
   end
 

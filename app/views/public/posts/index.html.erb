@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row mt-5">
+    <h4>投稿一覧</h4>
+  </div>
+
+  <div class="text-right">
+    <%= link_to "新規投稿", new_post_path, class: "btn btn-primary" %>
+  </div>
+
+  <div class="row mt-3">
+    <%= render 'public/posts/index', posts: @posts %>
+  </div>
+</div>
