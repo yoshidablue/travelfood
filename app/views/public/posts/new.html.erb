@@ -20,6 +20,10 @@
       <div class="col-4"><%= f.label "食べ物説明" %></div>
       <div class="col-6"><%= f.text_area :introduction, class: "w-100" %></div>
     </div>
+    <div class="row mt-2">
+      <div class="col-4"><%= f.label "タグ (,で区切ると複数タグ登録できます)" %></div>
+      <div class="col-6"><%= f.text_field :name, value: @tag_list, class: "w-100" %></div>
+    </div>
 
     <div class="row mt-2">
       <div class="col-2"></div>

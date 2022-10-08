@@ -29,6 +29,14 @@
             <td><%= @post.introduction %></td>
           </tr>
           <tr>
+            <th>タグ</th>
+            <td>
+              <% @post_tags.each do |tag| %>
+                <%= tag.name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
             <th>いいね数</th>
             <td id="favorite_buttons_<%= @post.id %>">
               <%= render "public/favorites/btn", post: @post %>

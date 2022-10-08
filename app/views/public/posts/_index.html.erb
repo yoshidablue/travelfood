@@ -8,6 +8,7 @@
           <th>都道府県名</th>
           <th>食べ物名</th>
           <th>説明</th>
+          <th>タグ</th>
           <th>いいね数</th>
           <th>コメント数</th>
         </tr>
@@ -24,6 +25,7 @@
               <% end %>
             </td>
             <td><%= post.introduction.truncate(10) %></td>
+            <td><%= post.tags.map(&:name).join(', ') %></td>
             <td id="favorite_buttons_<%= post.id %>">
               <%= render "public/favorites/btn", post: post %>
             </td>
