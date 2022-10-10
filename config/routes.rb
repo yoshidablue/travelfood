@@ -25,6 +25,9 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :create, :index, :show, :edit, :update, :destroy] do
       resources :food_comments, only: [:create, :destroy]
       resource  :favorites,     only: [:create, :destroy]
+      collection do
+        get 'search'
+      end
     end
   end
 

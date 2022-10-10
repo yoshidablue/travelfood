@@ -16,6 +16,11 @@
             <li><%= link_to "会員一覧", customers_path, class: "btn header-button text-light" %> </li>
             <li><%= link_to "投稿一覧", posts_path, class: "btn header-button text-light" %></li>
             <li><%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: "btn header-button text-light" %></li>
+            <li><%= search_form_for @q, url: search_posts_path do |f| %>
+                  <%= f.text_field :food_name_or_prefecture_name_cont %>
+                  <%= f.submit "検索" %>
+                <% end %>
+            </li>
 
           <!-- 管理者がログインしている時 -->
           <% elsif admin_signed_in? %>

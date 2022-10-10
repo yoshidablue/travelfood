@@ -59,6 +59,10 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def search
+    @results = @q.result
+  end
+
   private
 
   def post_params
