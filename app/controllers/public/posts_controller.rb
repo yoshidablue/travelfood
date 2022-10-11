@@ -18,17 +18,25 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all.order("created_at DESC")
-        # params[:tag_id]は、「タグ検索画面で、指定したタグ(例: 漬物)のidがわたってくる
-        # 一番上の「タグで絞り込み」というメニューを選んだまま検索ボタンが押されたら？ → params[:tag_id]がnil(空の値になっている)
-      # if params[:tag_id].present?    params[:tag_id]に値があるの？ yes/no → プルダウンでタグが選択されている？されていない？
-          # タグが選ばれてきた場合の検索結果を返してあげてる
-          # Tag.find(params[:tag_id]) <- Tag.find(id)で、Tagデータから指定されたidのデータを見つけてくる。
-          # Tag.find(params[:tag_id]).posts <- 見つけてきたタグデータに紐づく全てのpostを取得する。
-        # @posts = Tag.find(params[:tag_id]).posts
-      # else
-          # タグが選ばれていない -> 全ての投稿を返す仕様にしている
-        #@posts = Post.all
+    if params[:latest]
+      @posts = Post.latest
+    elsif params[:old]
+      @posts = Post.old
+    elsif params[:star_count]
+      @posts = Post.star_count
+    else
+      @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all.order("created_at DESC")
+          # params[:tag_id]は、「タグ検索画面で、指定したタグ(例: 漬物)のidがわたってくる
+          # 一番上の「タグで絞り込み」というメニューを選んだまま検索ボタンが押されたら？ → params[:tag_id]がnil(空の値になっている)
+        # if params[:tag_id].present?    params[:tag_id]に値があるの？ yes/no → プルダウンでタグが選択されている？されていない？
+            # タグが選ばれてきた場合の検索結果を返してあげてる
+            # Tag.find(params[:tag_id]) <- Tag.find(id)で、Tagデータから指定されたidのデータを見つけてくる。
+            # Tag.find(params[:tag_id]).posts <- 見つけてきたタグデータに紐づく全てのpostを取得する。
+          # @posts = Tag.find(params[:tag_id]).posts
+        # else
+            # タグが選ばれていない -> 全ての投稿を返す仕様にしている
+          #@posts = Post.all
+    end
 
     @fdivs = []
     @posts.each do |post|

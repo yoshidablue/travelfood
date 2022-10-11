@@ -15,6 +15,10 @@ class Post < ApplicationRecord
   validates :food_name,     presence: true
   validates :introduction,  presence: true, length:{maximum: 50}
 
+  scope :latest,     -> {order(created_at: :desc)}
+  scope :old,        -> {order(created_at: :asc)}
+  scope :star_count, -> {find(FoodComment.group(:post_id).order('avg(star) desc').pluck(:post_id))}
+
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
   end
