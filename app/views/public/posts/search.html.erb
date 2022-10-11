@@ -7,10 +7,10 @@
     <table class="table">
       <thead style="background-color:#FFCC66;">
         <tr>
-          <th>投稿日時</th>
+          <th><%= sort_link(@q, :created_at, "投稿日時") %></th>
           <th>食べ物画像</th>
           <th>都道府県名</th>
-          <th>食べ物名</th>
+          <th><%= sort_link(@q, :food_name, "食べ物名") %></th>
           <th>評価</th>
           <th>説明</th>
           <th>タグ</th>
