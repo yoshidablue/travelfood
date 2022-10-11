@@ -75,7 +75,7 @@ class Public::PostsController < ApplicationController
   end
 
   def search
-    @results = @q.result
+    @results = @q.result(distinct: true).order("created_at DESC")
 
     @fdivs = []
     @results.each do |post|

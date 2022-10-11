@@ -29,6 +29,8 @@ Rails.application.routes.draw do
         get 'search'
       end
     end
+    resources :rooms,    only: [:create, :show, :index]
+    resources :messages, only: [:create]
   end
 
   namespace :admin do
