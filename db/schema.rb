@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2022_10_08_064111) do
     t.integer "post_id", null: false
     t.integer "customer_id", null: false
     t.text "comment", null: false
+    t.string "star"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

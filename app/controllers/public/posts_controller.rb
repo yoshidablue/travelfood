@@ -29,6 +29,20 @@ class Public::PostsController < ApplicationController
       # else
           # タグが選ばれていない -> 全ての投稿を返す仕様にしている
         #@posts = Post.all
+
+    @fdivs = []
+    @posts.each do |post|
+      stars = []
+      post.food_comments.each do |food_comment|
+        stars.push(food_comment.star.to_i)
+      end
+      fdiv = stars.sum.fdiv(stars.length)
+
+      if fdiv.nan?
+        fdiv = ""
+      end
+      @fdivs.push(fdiv)
+    end
   end
 
   def show
@@ -39,6 +53,7 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    # pluckはmapと同じ意味です
     @tag_list = @post.tags.pluck(:name).join(',')
   end
 
@@ -61,6 +76,20 @@ class Public::PostsController < ApplicationController
 
   def search
     @results = @q.result
+
+    @fdivs = []
+    @results.each do |post|
+      stars = []
+      post.food_comments.each do |food_comment|
+        stars.push(food_comment.star.to_i)
+      end
+      fdiv = stars.sum.fdiv(stars.length)
+
+      if fdiv.nan?
+        fdiv = ""
+      end
+      @fdivs.push(fdiv)
+    end
   end
 
   private

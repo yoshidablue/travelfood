@@ -7,6 +7,20 @@ class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(params[:id])
     @posts = @customer.posts.order("created_at DESC")
+
+    @fdivs = []
+    @posts.each do |post|
+      stars = []
+      post.food_comments.each do |food_comment|
+        stars.push(food_comment.star.to_i)
+      end
+      fdiv = stars.sum.fdiv(stars.length)
+
+      if fdiv.nan?
+        fdiv = ""
+      end
+      @fdivs.push(fdiv)
+    end
   end
 
   def edit
@@ -37,6 +51,20 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
     favorites = Favorite.where(customer_id: @customer.id).pluck(:post_id)
     @favorite_posts = Post.find(favorites)
+
+    @fdivs = []
+    @favorite_posts.each do |post|
+      stars = []
+      post.food_comments.each do |food_comment|
+        stars.push(food_comment.star.to_i)
+      end
+      fdiv = stars.sum.fdiv(stars.length)
+
+      if fdiv.nan?
+        fdiv = ""
+      end
+      @fdivs.push(fdiv)
+    end
   end
 
   private

@@ -20,7 +20,7 @@ class Public::FoodCommentsController < ApplicationController
   private
 
   def food_comment_params
-    params.require(:food_comment).permit(:comment)
+    params.require(:food_comment).permit(:comment, :star)
   end
 
 end
