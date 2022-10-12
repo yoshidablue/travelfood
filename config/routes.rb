@@ -29,8 +29,13 @@ Rails.application.routes.draw do
         get 'search'
       end
     end
-    resources :rooms,    only: [:create, :show, :index]
+    resources :rooms,    only: [:create, :index, :show]
     resources :messages, only: [:create]
+    resources :groups do
+      resources :group_comments, only: [:create, :destroy]
+      get "join" => "groups#join"
+      delete "all_destroy" => "groups#all_destroy"
+    end
   end
 
   namespace :admin do
