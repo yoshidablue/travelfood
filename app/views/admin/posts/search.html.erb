@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row mt-5">
+    <h4>検索一覧</h4>
+  </div>
+
+  <div class="row mt-3">
+    <table class="table">
+      <thead style="background-color:#FFCC66;">
+        <tr>
+          <th><%= sort_link(@q, :created_at, "投稿日時") %></th>
+          <th>食べ物画像</th>
+          <th>都道府県名</th>
+          <th><%= sort_link(@q, :food_name, "食べ物名") %></th>
+          <th>評価</th>
+          <th>説明</th>
+          <th>タグ</th>
+          <th>コメント数</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @results.each_with_index do |post, i| %>
+          <tr>
+            <td><%= post.created_at.strftime('%Y/%m/%d') %></td>
+            <td><%= image_tag post.image, size: "80x80" %></td>
+            <td><%= post.prefecture.name %></td>
+            <td>
+              <%= link_to admin_post_path(post.id) do %>
+                <% post.food_name %>
+              <% end %>
+            </td>
+            <td><%= @fdivs[i].to_f.round(1) %></td>
+            <td><%= post.introduction.truncate(10) %></td>
+            <td><%= post.tags.map(&:name).join(', ') %></td>
+            <td><%= post.food_comments.count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

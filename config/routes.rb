@@ -43,6 +43,17 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :customers, only: [:index, :show, :edit, :update]
+    resources :posts,     only: [:index, :show, :destroy] do
+      resources :food_comments, only: [:destroy]
+      collection do
+        get 'search'
+      end
+    end
+    resources :groups do
+      resources :group_comments, only: [:destroy]
+      delete "all_destroy" => "groups#all_destroy"
+    end
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
