@@ -1,5 +1,7 @@
 class Public::CustomersController < ApplicationController
 
+  before_action :ensure_guest_customer, only: [:edit]
+
   def index
     @customers = Customer.all.order("created_at DESC")
   end
@@ -95,6 +97,13 @@ class Public::CustomersController < ApplicationController
 
   def customer_params
     params.require(:customer).permit(:profile_image, :name, :prefecture_id, :food)
+  end
+
+  def ensure_guest_customer
+    @customer = Customer.find(params[:id])
+    if @customer.name == "guestuser"
+      redirect_to customer_path(current_customer) , notice: 'ゲストユーザーはプロフィール編集画面へ遷移できません。'
+    end
   end
 
 end

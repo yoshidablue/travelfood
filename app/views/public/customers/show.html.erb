@@ -6,19 +6,19 @@
   <div class="row mt-3">
     <table class="table col-3">
       <tr>
-        <td>プロフィール画像</td>
+        <th>プロフィール画像</th>
         <td><%= image_tag @customer.get_profile_image, size:'80x80' %></td>
       </tr>
       <tr>
-        <td>名前</td>
+        <th>名前</th>
         <td><%= @customer.name %></td>
       </tr>
       <tr>
-        <td>好きな場所</td>
+        <th>好きな場所</th>
         <td><%= @customer.prefecture&.name %></td>
       </tr>
       <tr>
-        <td>好きな食べ物</td>
+        <th>好きな食べ物</th>
         <td><%= @customer.food %></td>
       </tr>
     </table>
@@ -31,8 +31,10 @@
   <div class="row mt-3">
     <div class="col-3">
       <div class="row mt-2">
-        <% if @customer == current_customer %>
-          <%= link_to "編集", edit_customer_path, class: "btn btn-success btn-block" %>
+        <% if @customer.name != "guestuser" %>
+          <% if @customer == current_customer %>
+            <%= link_to "編集", edit_customer_path, class: "btn btn-success btn-block" %>
+          <% end %>
         <% end %>
       </div>
       <div class="row mt-2">
