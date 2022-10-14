@@ -1,9 +1,10 @@
 class Public::CustomersController < ApplicationController
 
+  before_action :authenticate_customer!
   before_action :ensure_guest_customer, only: [:edit]
 
   def index
-    @customers = Customer.all.order("created_at DESC")
+    @customers = Customer.all.order("created_at DESC").page(params[:page]).per(10)
   end
 
   def show

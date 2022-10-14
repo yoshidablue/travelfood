@@ -5,4 +5,8 @@
 
   <%= render 'index', customers: @customers %>
 
+  <div class="row justify-content-center">
+    <%= paginate @customers %>
+  </div>
+
 </div>

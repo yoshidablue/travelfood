@@ -59,3 +59,4 @@ gem 'devise'
 gem "net-smtp"
 gem 'jquery-rails'
 gem 'ransack'
+gem 'kaminari','~> 1.2.1'
