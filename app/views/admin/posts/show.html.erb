@@ -41,7 +41,7 @@
             <td><%= @post.food_comments.count %></td>
           </tr>
           <tr>
-            <td><%= link_to "削除", admin_posts_path(@post), method: :delete, class: "btn btn-danger" %></td>
+            <td><%= link_to "削除", admin_post_path(@post), method: :delete, class: "btn btn-danger" %></td>
           </tr>
         </tbody>
       </table>
